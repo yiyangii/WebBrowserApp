@@ -6,7 +6,21 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/containerurl"
+        android:id="@+id/page_display"
+        android:layout_width="477dp"
+        android:layout_height="328dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/page_control"
         android:layout_width="730dp"
         android:layout_height="77dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -15,11 +29,27 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/containerbrowse"
-        android:layout_width="731dp"
-        android:layout_height="334dp"
-        android:layout_marginTop="77dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/browser_control"
+        android:layout_width="253dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="78dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/page_display"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/page_list"
+        android:layout_width="250dp"
+        android:layout_height="239dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
