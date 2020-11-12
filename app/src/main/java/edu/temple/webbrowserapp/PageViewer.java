@@ -30,7 +30,7 @@ public class PageViewer extends Fragment {
         web = (WebView) l.findViewById(R.id.webview);
 
 
-        WebViewClient wc = new WebViewClient() {
+        WebViewClient webview = new WebViewClient() {
             @Override
             public void doUpdateVisitedHistory(WebView web, String url, boolean reload) {
                 parent.updateURL(url);
@@ -40,7 +40,7 @@ public class PageViewer extends Fragment {
                 super.onLoadResource(web, url);
             }
         };
-        web.setWebViewClient(wc);
+        web.setWebViewClient(webview);
         web.getSettings().setJavaScriptEnabled(true);
 
         if(savedInstanceState != null){
