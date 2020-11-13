@@ -1,92 +1,47 @@
 package edu.temple.webbrowserapp;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PageListFragment extends Fragment implements Parcelable {
-    ArrayList<String> pageTitles;
-    ArrayList<PageViewer>fragments2;
-    ListView list;
-    selectInterface parentActivity;
-    TextView tv;
-    int position;
-    private ArrayList<PageViewer> pages;
-    ListAdapter listAdapter;
+public class PageListFragment extends Fragment {
+    public void addSelectListener(OnItemSelectedListener listener){
+        this.listener = listener;
+    }
+
+    public interface OnItemSelectedListener{
+        void onItemSelected(int iID);
+    }
+
+    private OnItemSelectedListener listener;
+
+    private ArrayList<String> array;
+    private ListView ls;
+    private ArrayAdapter listadapter;
 
     public PageListFragment() {
 
     }
 
-    protected PageListFragment(Parcel in) {
-        pageTitles = in.createStringArrayList();
-        fragments2 = in.createTypedArrayList(PageViewer.CREATOR);
-        position = in.readInt();
-        pages = in.createTypedArrayList(PageViewer.CREATOR);
+    public static PageListFragment newInstance(ArrayList<String> lstWebTitle) {
+        PageListFragment fragment = new PageListFragment();
+        Bundle args = new Bundle();
+        args.putStringArrayList("WebTitle",lstWebTitle);
+        fragment.setArguments(args);
+        return fragment;
     }
-
-
-
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-        if (context instanceof PageListFragment.selectInterface) {
-            parentActivity = (PageListFragment.selectInterface) context;
-        } else {
-            throw new RuntimeException("You must implement selectInterface to attach this fragment");
-        }
-
-    }
-
-    public void passList(ArrayList<String> pageList){
-        pageTitles = pageList;
-        parentActivity.passList(list);
-
-    }
-
-    public void createInstance(){
-        parentActivity.passList(list);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if(getArguments() != null){
-            fragments2 = getArguments().getParcelableArrayList("ArrayList");
-        }
-        this.setRetainInstance(true);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View l = inflater.inflate(R.layout.listviewactivity, container, false);
-        list = l.findViewById(R.id.listlayout);
-        listAdapter = new ListAdapter(getActivity(), pageTitles);
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                parentActivity.itemSelected(position,fragments2);
-            }
-        });
-
-        return l;
-    }
-    @Override
+    /*@Override
     public void onSaveInstanceState(@NonNull Bundle outState){
         outState.putParcelableArrayList("ArrayList",fragments2);
         super.onSaveInstanceState(outState);
@@ -103,23 +58,68 @@ public class PageListFragment extends Fragment implements Parcelable {
         dest.writeTypedList(fragments2);
         dest.writeInt(position);
         dest.writeTypedList(pages);
+    }*/
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
-    public static final Creator<PageListFragment> CREATOR = new Creator<PageListFragment>() {
-        @Override
-        public PageListFragment createFromParcel(Parcel in) {
-            return new PageListFragment(in);
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        final View myFragmentView =inflater.inflate(R.layout.listviewactivity, container, false);
+        ls =(ListView) myFragmentView.findViewById(R.id.ListLayout);
+        array =new ArrayList<>();
+        ArrayList<String> temp;
+        if (getArguments()!=null) {
+            temp = getArguments().getStringArrayList("WebTitle");
+
+            for (int i=0;i<temp.size();i++){
+                if (array.size()<=i){
+                    array.add(temp.get(i));
+                }
+                else{
+                    array.set(i,temp.get(i));
+                }
+            }
         }
-
-        @Override
-        public PageListFragment[] newArray(int size) {
-            return new PageListFragment[size];
+        if (array ==null) {
+            array = new ArrayList<>();
+            array.add("");
         }
-    };
+        listadapter =new ArrayAdapter<>( getActivity(), android.R.layout.simple_list_item_1, array);
+        ls.setAdapter(listadapter);
+        ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (listener!=null){listener.onItemSelected(position);}
+            }
+        });
 
-    public interface selectInterface{
+        return  myFragmentView;
+    }
+    //public void UpdateList(ArrayList<String> arrWebTitle){
+        //for (int i=0;i<arrWebTitle.size();i++){
+            //if (array.size()<=i){
+                //array.add(arrWebTitle.get(i));
+            //}
+           // else{
 
+    public void UpdateList(ArrayList<String> arrWebTitle){
+        for (int i=0;i<arrWebTitle.size();i++){
+            if (array.size()<=i){
+                array.add(arrWebTitle.get(i));
+            }
+            else{
+                array.set(i,arrWebTitle.get(i));
+            }
+        }
+        listadapter.notifyDataSetChanged();
+    }
 
-        void itemSelected(int item, ArrayList<PageViewer> fragments2);
-        void passList(ListView list);
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
     }
 }

@@ -1,59 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".BrowserActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
+        android:id="@+id/browse_control"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/page_control"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <FrameLayout
+        android:id="@+id/page_display"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/browser_control"
-            android:layout_width="409dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="1dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/page_display"
-            android:layout_width="403dp"
-            android:layout_height="572dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="156dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/page_control"
-            android:layout_width="401dp"
-            android:layout_height="94dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="56dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </FrameLayout>
-        <FrameLayout
-            android:id="@+id/page_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="1dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </FrameLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </FrameLayout>
 </LinearLayout>
