@@ -64,8 +64,6 @@ public class PageListFragment extends Fragment implements Parcelable {
     public void passList(ArrayList<String> pageList){
         pageTitles = pageList;
         parentActivity.passList(list);
-        //  list.setAdapter(listAdapter);
-        // list.getAdapter();
 
     }
 
@@ -118,9 +116,7 @@ public class PageListFragment extends Fragment implements Parcelable {
     }
 
     public interface selectInterface{
-        void OnNewButtonClick();
 
-        void onItemSelected(int iID);
 
         void itemSelected(int item, ArrayList<PageViewer> fragments2);
         void passList(ListView list);

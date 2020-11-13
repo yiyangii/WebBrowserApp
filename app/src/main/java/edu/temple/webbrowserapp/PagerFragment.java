@@ -56,7 +56,7 @@ public class PagerFragment extends Fragment {
         fa = new FragmentAdapter(getChildFragmentManager(), fmlist);
 
         if (savedInstanceState != null) {
-            // fragments2 = savedInstanceState.getParcelableArrayList("Array");
+
             viewpager.setAdapter(fa);
             viewpager.getAdapter().notifyDataSetChanged();
 

@@ -37,37 +37,14 @@ public class PageViewer extends Fragment implements Parcelable {
         dest.writeInt(position);
     }
 
-    public interface Interface2 {
-        void updateURL(String text);
-        void UpdateTitle(String pageTitle);
-        void getcount(String pageTitle);
-    }
 
-
-
-
-    public void setURL(final String urlString) throws MalformedURLException {
-        webview.loadUrl(urlString);
-    }
-    public void Back(){
-        if(webview.canGoBack()){
-            webview.canGoBack();
-            webview.goBack();
-        }
-    }
-    public void Forward(){
-        if(webview.canGoForward()){
-            webview.canGoForward();
-            webview.goForward();
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.pageviewer, container, false);
-        webview = (WebView) view.findViewById(R.id.webview);
+        webview = view.findViewById(R.id.webview);
 
         WebViewClient webclient = new WebViewClient() {
             @Override
@@ -145,5 +122,29 @@ public class PageViewer extends Fragment implements Parcelable {
         webview.saveState(outState);
     }
 
+    public interface Interface2 {
+        void updateURL(String text);
+        void UpdateTitle(String pageTitle);
+        void getcount(String pageTitle);
+    }
+
+
+
+
+    public void setURL(final String urlString) throws MalformedURLException {
+        webview.loadUrl(urlString);
+    }
+    public void Back(){
+        if(webview.canGoBack()){
+            webview.canGoBack();
+            webview.goBack();
+        }
+    }
+    public void Forward(){
+        if(webview.canGoForward()){
+            webview.canGoForward();
+            webview.goForward();
+        }
+    }
 
 }

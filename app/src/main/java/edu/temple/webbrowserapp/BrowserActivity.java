@@ -20,7 +20,6 @@ public class BrowserActivity extends AppCompatActivity implements PageListFragme
     PageListFragment pagelist;
     PagerFragment pagefragment;
     ArrayList<PageViewer> fragments;
-    FragmentAdapter fmarray;
     ArrayList<String> titles;
     ArrayList<String> Url;
     int ID;
@@ -125,7 +124,6 @@ public class BrowserActivity extends AppCompatActivity implements PageListFragme
 
     }
 
-    @Override
     public void OnNewButtonClick() {
         Log.v("AAA","NewButton");
         getSupportActionBar().setTitle("");
@@ -133,7 +131,7 @@ public class BrowserActivity extends AppCompatActivity implements PageListFragme
 
     }
 
-    @Override
+
     public void onItemSelected(int iID) {
         pagefragment.setCurrentFragment(iID);
     }
