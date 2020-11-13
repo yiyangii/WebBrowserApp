@@ -15,7 +15,7 @@ public class BrowserControlFragment extends Fragment {
 
     ImageButton btw;
 
-    Interface3 viewPagerFace;
+    Interface3 inf;
 
     public BrowserControlFragment() {
 
@@ -30,7 +30,6 @@ public class BrowserControlFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState){
         super.onSaveInstanceState(outState);
-        // outState.putInt("position",position);
         outState.putAll(outState);
     }
 
@@ -43,11 +42,21 @@ public class BrowserControlFragment extends Fragment {
         btw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewPagerFace.createNewInstance();
+                inf.createNewInstance();
             }
         });
 
         return view;
+    }
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if (context instanceof BrowserControlFragment.Interface3) {
+            inf = (BrowserControlFragment.Interface3) context;
+        } else {
+            throw new RuntimeException("You must implement ViewPagerInterface to attach this fragment");
+        }
+
     }
 
     public interface Interface3 {

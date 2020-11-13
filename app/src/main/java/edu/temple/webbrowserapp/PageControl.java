@@ -23,31 +23,12 @@ public class PageControl extends Fragment {
     public PageControl() {
 
     }
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof Interface) {
-            parent = (Interface) context;
-        } else {
-            throw new RuntimeException("Error");
-        }
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.setRetainInstance(true);
-    }
-    public void setURL(String text){
-        Text.setText(text);
-    }
-
 
     public interface Interface {
         void back();
         void forward();
         void DisplayInfo(String website) throws MalformedURLException;
     }
-
 
 
     @Override
@@ -97,6 +78,23 @@ public class PageControl extends Fragment {
         });
 
         return view;
+    }
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof Interface) {
+            parent = (Interface) context;
+        } else {
+            throw new RuntimeException("Error");
+        }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.setRetainInstance(true);
+    }
+    public void setURL(String text){
+        Text.setText(text);
     }
 
 

@@ -13,7 +13,8 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     public FragmentAdapter(@NonNull FragmentManager fm,ArrayList<PageViewer> fragments2) {
         super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-
+        FragmentManager fragmentManager;
+        fragmentManager = fm;
         fmarray = fragments2;
     }
     @Override

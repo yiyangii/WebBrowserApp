@@ -38,17 +38,7 @@ public class PageListFragment extends Fragment implements Parcelable {
         pages = in.createTypedArrayList(PageViewer.CREATOR);
     }
 
-    public static final Creator<PageListFragment> CREATOR = new Creator<PageListFragment>() {
-        @Override
-        public PageListFragment createFromParcel(Parcel in) {
-            return new PageListFragment(in);
-        }
 
-        @Override
-        public PageListFragment[] newArray(int size) {
-            return new PageListFragment[size];
-        }
-    };
 
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -114,6 +104,17 @@ public class PageListFragment extends Fragment implements Parcelable {
         dest.writeInt(position);
         dest.writeTypedList(pages);
     }
+    public static final Creator<PageListFragment> CREATOR = new Creator<PageListFragment>() {
+        @Override
+        public PageListFragment createFromParcel(Parcel in) {
+            return new PageListFragment(in);
+        }
+
+        @Override
+        public PageListFragment[] newArray(int size) {
+            return new PageListFragment[size];
+        }
+    };
 
     public interface selectInterface{
 
