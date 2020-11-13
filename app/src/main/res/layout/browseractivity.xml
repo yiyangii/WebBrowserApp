@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BrowserControlFragment">
+
+    <ImageButton
+        android:id="@+id/imagebutton"
+        android:layout_width="106dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="4dp"
+        android:src="@android:drawable/ic_menu_save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@android:drawable/ic_menu_save" />
+</androidx.constraintlayout.widget.ConstraintLayout>
