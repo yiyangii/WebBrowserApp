@@ -2,47 +2,24 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".BrowserActivity">
 
-    <FrameLayout
-        android:id="@+id/page_control"
+    <ListView
+        android:id="@+id/ListView"
+        android:layout_width="757dp"
+        android:layout_height="275dp">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/CloseButton"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:id="@+id/browse_control"
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/page_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </FrameLayout>
-        </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/page_display"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </FrameLayout>
-    </LinearLayout>
 </LinearLayout>
 

@@ -6,39 +6,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PageControlFragment">
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/URL"
-        android:layout_width="236dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="173dp"
-        android:layout_marginBottom="683dp"
-        android:ems="10" />
+        <EditText
+            android:id="@+id/URL"
+            android:layout_width="236dp"
+            android:layout_height="59dp"
+            android:layout_weight="1"
+            android:ems="10" />
 
-    <ImageButton
-        android:id="@+id/search"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginStart="244dp"
-        android:layout_marginTop="1dp"
-        android:src="@android:drawable/ic_menu_search" />
+        <ImageButton
+            android:id="@+id/search"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@android:drawable/ic_menu_search" />
 
-    <ImageButton
-        android:id="@+id/backbutton"
-        android:layout_width="59dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="297dp"
-        android:src="?attr/homeAsUpIndicator"
-        tools:src="?attr/homeAsUpIndicator" />
+        <ImageButton
+            android:id="@+id/backbutton"
+            android:layout_width="59dp"
+            android:layout_height="56dp"
+            android:src="?attr/homeAsUpIndicator" />
 
-    <ImageButton
-        android:id="@+id/redobutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="353dp"
-        android:src="@android:drawable/ic_menu_revert"
-        tools:src="@android:drawable/ic_menu_revert" />
+        <ImageButton
+            android:id="@+id/redobutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_revert" />
+    </LinearLayout>
 
 
 </FrameLayout>
