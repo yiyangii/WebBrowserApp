@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 public class PageControlFragment extends Fragment {
     private ImageButton[] btn = new ImageButton[3];
     private EditText txtURL;
-    private int[] btn_id = {R.id.search, R.id.backbutton, R.id.redobutton};
+    private int[] btn_id = {R.id.SearchButton, R.id.BackButton, R.id.RedoButton};
 
 
     public void addButtonClickListener(OnClickListener listener){this.listener = listener;}
@@ -42,7 +42,7 @@ public class PageControlFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        txtURL=(EditText)getActivity().findViewById(R.id.URL);
+        txtURL=(EditText)getActivity().findViewById(R.id.WebURL);
 
         for(int i = 0; i < btn.length; i++){
             btn[i] = (ImageButton) getActivity().findViewById(btn_id[i]);

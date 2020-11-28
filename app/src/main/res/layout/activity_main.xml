@@ -7,17 +7,22 @@
     android:orientation="vertical"
     tools:context=".BrowserActivity">
 
-    <ListView
-        android:id="@+id/ListView"
+    <FrameLayout
+        android:id="@+id/browser_control"
         android:layout_width="match_parent"
-        android:layout_height="620dp">
+        android:layout_height="94dp">
 
-    </ListView>
+    </FrameLayout>
 
-    <Button
-        android:id="@+id/CloseButton"
+    <FrameLayout
+        android:id="@+id/page_control"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Close" />
+        android:layout_height="98dp" />
 
+    <FrameLayout
+        android:id="@+id/page_display"
+        android:layout_width="match_parent"
+        android:layout_height="530dp">
+
+    </FrameLayout>
 </LinearLayout>

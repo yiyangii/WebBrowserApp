@@ -116,12 +116,12 @@ public class PageViewerFragment extends Fragment {
     }
 
     public void ButtonOp(int buttonid){
-        if (buttonid==R.id.backbutton) {
+        if (buttonid==R.id.BackButton) {
             if (webview.canGoBack()) {
                 webview.goBack();
             }
         }
-        else if (buttonid==R.id.redobutton){
+        else if (buttonid==R.id.RedoButton){
             if (webview.canGoForward()) {
                 webview.goForward();
             }

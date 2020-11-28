@@ -14,23 +14,25 @@
         <ImageButton
             android:id="@+id/BookMarkButton"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="66dp"
             android:layout_weight="1"
-            android:src="@android:drawable/ic_input_get" />
+            android:src="@android:drawable/ic_input_get"
+            tools:src="@android:drawable/btn_star_big_on" />
 
         <ImageButton
-            android:id="@+id/SaveBookMarkButton"
+            android:id="@+id/SaveBookMark"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="66dp"
             android:layout_weight="1"
             android:src="@android:drawable/ic_menu_save" />
 
         <ImageButton
-            android:id="@+id/AddButton"
+            android:id="@+id/ImageButton"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="66dp"
             android:layout_weight="1"
-            android:src="@android:drawable/ic_menu_add" />
+            android:src="@android:drawable/ic_menu_add"
+            tools:src="@android:drawable/ic_input_add" />
     </LinearLayout>
 
 </FrameLayout>

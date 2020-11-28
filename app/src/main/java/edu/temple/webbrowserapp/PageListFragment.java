@@ -70,7 +70,7 @@ public class PageListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         final View myFragmentView =inflater.inflate(R.layout.listviewactivity, container, false);
-        ls =(ListView) myFragmentView.findViewById(R.id.ListLayout);
+        ls =(ListView) myFragmentView.findViewById(R.id.List);
         array =new ArrayList<>();
         ArrayList<String> temp;
         if (getArguments()!=null) {
@@ -101,11 +101,11 @@ public class PageListFragment extends Fragment {
         return  myFragmentView;
     }
     //public void UpdateList(ArrayList<String> arrWebTitle){
-        //for (int i=0;i<arrWebTitle.size();i++){
-            //if (array.size()<=i){
-                //array.add(arrWebTitle.get(i));
-            //}
-           // else{
+    //for (int i=0;i<arrWebTitle.size();i++){
+    //if (array.size()<=i){
+    //array.add(arrWebTitle.get(i));
+    //}
+    // else{
 
     public void UpdateList(ArrayList<String> arrWebTitle){
         for (int i=0;i<arrWebTitle.size();i++){

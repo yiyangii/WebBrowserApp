@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 
 public class BrowserControlFragment extends Fragment {
     private ImageButton button;
+    private ImageButton bm;
+    private ImageButton bts;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,6 +22,8 @@ public class BrowserControlFragment extends Fragment {
 
     public interface OnNewButtonClickListener{
         void OnNewButtonClick();
+        void OnBookmark();
+        void OnSave();
     }
     //public interface Interface3 {
     //        void createNewInstance();
@@ -48,11 +52,25 @@ public class BrowserControlFragment extends Fragment {
 
         final View myFragmentView =
                 inflater.inflate(R.layout.browseractivity, container, false);
-        button =myFragmentView.findViewById(R.id.imagebutton);
+        button =myFragmentView.findViewById(R.id.ImageButton);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 listener.OnNewButtonClick();
+            }
+        });
+        bm.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                listener.OnBookmark();
+            }
+        });
+
+        bts=myFragmentView.findViewById(R.id.SaveBookMark);
+        bts.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                listener.OnSave();
             }
         });
         return myFragmentView;
