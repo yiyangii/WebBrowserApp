@@ -29,8 +29,8 @@ public class BrowserActivity extends AppCompatActivity implements PageControlFra
     private final int REQUEST_CODE=111;
 
 
-    public static void BookMarkFragment(int ID2){
-        ID2 = ID2;
+    public static void BookMarkFragment(int id){
+        ID2 = id;
     }
 
     @SuppressLint("WrongViewCast")
@@ -43,9 +43,9 @@ public class BrowserActivity extends AppCompatActivity implements PageControlFra
         else{
             ID = 0;
         }
-        FragmentManager fragmentmanager;
 
-        bkm = LoadBookmark();
+
+        bkm = Load();
 
         setContentView(R.layout.activity_main);
         fragmentmanager = getSupportFragmentManager();
@@ -131,7 +131,7 @@ public class BrowserActivity extends AppCompatActivity implements PageControlFra
         if (button == R.id.SearchButton) {
             pager.LoadPageFromURL(fragmentcontralfm.getURL());
         }else{
-            pager.BackNext(button );
+            pager.BackNext(button);
         }
     }
 
@@ -139,7 +139,37 @@ public class BrowserActivity extends AppCompatActivity implements PageControlFra
     public void OnPagerPageChangeURL(int position, String sURL) {
         fragmentcontralfm.setURL(sURL);
     }
-
+    //public void addPage(){//adds page to list of bookmarked pages after clicking "save page" button
+    //        Toast.makeText(this, "Page Saved!", Toast.LENGTH_SHORT).show();
+    //
+    //        StringBuilder sb = new StringBuilder();
+    //        savedPageTitles.add(savedTitle);
+    //        Url2.add(url);
+    //
+    //      //  Url.add(url);
+    //        StringBuilder sb2 = new StringBuilder();
+    //
+    //        for(String s: Url2){
+    //            sb2.append(s);
+    //            sb2.append(",");
+    //        }
+    //
+    //        for(String s: savedPageTitles){
+    //            sb.append(s);
+    //            sb.append(",");
+    //        }
+    //
+    //        SharedPreferences prefer = getSharedPreferences("element",0);
+    //        SharedPreferences.Editor editor = prefer.edit();
+    //        editor.putString("elements", sb.toString());
+    //        editor.apply();
+    //
+    //        SharedPreferences prefer2 = getSharedPreferences("element2",0);
+    //        SharedPreferences.Editor editor2 = prefer2.edit();
+    //        editor2.putString("elements2", sb2.toString());
+    //        editor2.apply();
+    //
+    //    }
     @Override
     public void OnPagerPageFinish(int position,String sTitle) {
 
@@ -192,12 +222,13 @@ public class BrowserActivity extends AppCompatActivity implements PageControlFra
             BookMarkFragment bkTmp=new BookMarkFragment();
             bkTmp.setVal(bkm.size(),sTitle,sURL);
             bkm.add(bkTmp);
-            SaveBookmark();
+            SaveBookMarkLs();
             Toast.makeText(getApplicationContext(),"Bookmark save success.",Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(getApplicationContext(),"   No Title or URL \nBookmark not save",Toast.LENGTH_LONG).show();
         }
     }
+
 
     public void OnBookmark(){
         Intent MyInform=new Intent (BrowserActivity.this,BookMarkActivity.class);
@@ -209,54 +240,81 @@ public class BrowserActivity extends AppCompatActivity implements PageControlFra
         pager.setCurrentFragment(iID);
     }
 
+
+    private ArrayList<BookMarkFragment> Load(){
+        ArrayList<BookMarkFragment> arrTemp=new ArrayList<>();
+
+        Context context = getApplicationContext();
+        SharedPreferences preference = context.getSharedPreferences("MyAppInfo",Context.MODE_PRIVATE);
+
+        int count = preference.getInt("Total" , 0);
+
+        for (int i=0; i<count ;i++){
+            BookMarkFragment bkm1=new BookMarkFragment();
+            int ID3 = preference.getInt("B_ID_"+i,-1);
+            String title = preference.getString("B_Title_"+i,"");
+            String url=preference.getString("B_URL_"+i,"");
+            bkm1.setVal(ID3,title,url);
+            arrTemp.add(bkm1);
+        }
+        return arrTemp;
+    }
+    //public void buttonClicked(){
+    //
+    //        savedPageTitles.removeAll(savedPageTitles);
+    //        SharedPreferences pref = getSharedPreferences("element",MODE_PRIVATE);
+    //        String web2 = pref.getString("elements", "Google");
+    //        String[] items = web2.split(",");
+    //        savedPageTitles.addAll(Arrays.asList(items));
+    //
+    //        Url2.removeAll(Url2);
+    //       // Url.removeAll(Url);
+    //        SharedPreferences pref2 = getSharedPreferences("element2",MODE_PRIVATE);
+    //        String web3 = pref2.getString("elements2", "google.com");
+    //        String[] items2 = web3.split(",");
+    //        Url2.addAll(Arrays.asList(items2));
+    //      //  Url.addAll(Arrays.asList(items2));
+    //
+    //
+    //        Intent ActivityIntent = new Intent(BrowserActivity.this, BookmarksActivity.class);
+    //        ActivityIntent.putStringArrayListExtra("Save",savedPageTitles);
+    //        ActivityIntent.putStringArrayListExtra("Url",Url2);
+    //        startActivity(ActivityIntent);
+
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("igCurPagerID", ID);
 
     }
-    private int SaveBookmark(){
+    private int SaveBookMarkLs(){
         //SharedPreferences pref = getSharedPreferences("MyAppInfo" , MODE_MULTI_PROCESS);
+
+
         Context context = getApplicationContext();
-        SharedPreferences pref = context.getSharedPreferences("MyAppInfo",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("TotalBookmark" ,bkm.size());
+        SharedPreferences preference = context.getSharedPreferences("MyAppInfo",Context.MODE_PRIVATE);
+        SharedPreferences.Editor preferenceeditor = preference.edit();
+        preferenceeditor.putInt("TotalBookmark" ,bkm.size());
 
         for (int i=0; i < bkm.size();i++){
-            editor.putInt("B_ID_"+i, bkm.get(i).getID());
-            editor.putString("B_Title_"+i,bkm.get(i).getTitle());
-            editor.putString("B_URL_"+i,bkm.get(i).getURL());
+            preferenceeditor.putInt("B_ID_"+i, bkm.get(i).getID());
+            preferenceeditor.putString("B_Title_"+i,bkm.get(i).getTitle());
+            preferenceeditor.putString("B_URL_"+i,bkm.get(i).getURL());
         }
 
-        editor.apply();
+        preferenceeditor.apply();
         return 0;
     }
     @Override
-    public void onWindowFocusChanged (boolean hasFocus){
-        bkm=LoadBookmark();
-        if (hasFocus && (ID2>=0)){
+    public void onWindowFocusChanged (boolean v){
+        bkm= Load();
+        if (v && (ID2 >= 0)){
+
             pager.LoadPageFromURL(bkm.get(ID2).getURL());
             ID2 = -1;
         }
     }
-    private ArrayList<BookMarkFragment> LoadBookmark(){
-        ArrayList<BookMarkFragment> arrTemp=new ArrayList<>();
 
-        Context context = getApplicationContext();
-        SharedPreferences pref = context.getSharedPreferences("MyAppInfo",Context.MODE_PRIVATE);
-
-        int itotalBookmark=pref.getInt("TotalBookmark" , 0);
-
-        for (int i=0; i<itotalBookmark;i++){
-            BookMarkFragment bkTmp=new BookMarkFragment();
-            int iTmpID=pref.getInt("B_ID_"+i,-1);
-            String iTmpTitle=pref.getString("B_Title_"+i,"");
-            String iTmpURL=pref.getString("B_URL_"+i,"");
-            bkTmp.setVal(iTmpID,iTmpTitle,iTmpURL);
-            arrTemp.add(bkTmp);
-        }
-        return arrTemp;
-    }
 
 
 

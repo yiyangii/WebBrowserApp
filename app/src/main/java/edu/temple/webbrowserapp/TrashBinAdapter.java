@@ -12,13 +12,10 @@ import android.widget.TextView;
 
 public class TrashBinAdapter extends BaseAdapter{
     private Context context;
-    private ArrayList<String> text;
-    private AttentionClickListener mAttentionClickListener;
+    private ArrayList<String> Str;
+    private AttentionClickListener lster;
 
     //interface
-    public void setAttentionClickListener(AttentionClickListener attentionClickListener) {
-        mAttentionClickListener = attentionClickListener;
-    }
 
     public interface AttentionClickListener {
         void DeleteItem(int iID);
@@ -27,47 +24,69 @@ public class TrashBinAdapter extends BaseAdapter{
 
     public TrashBinAdapter(Context context, ArrayList<String> text){
         this.context = context;
-        this.text=text;
+        this.Str = text;
     }
+
+    public void setAttentionClickListener(AttentionClickListener attentionClickListener) {
+        lster = attentionClickListener;
+    }
+    //public View getView
+    //ViewHolder vhs = (ViewHolder) v.getTag();
+    //vhs.textView.setText(getItem(position).toString());
+
     @Override
     public int getCount() {
-        return text.size();
+        return Str.size();
     }
+
     @Override
     public Object getItem(int position) {
-        return text.get(position);
+        return Str.get(position);
     }
+
+
     @Override
     public long getItemId(int position) {
         return position;
     }
+
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int index=position;
-        View view=convertView;
-        if(view==null){
+        final int pos = position;
+        View view = convertView;
+        if(view == null){
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view=inflater.inflate(R.layout.bookmarkadapter, null);
         }
+
+
         final TextView txtTitle=(TextView)view.findViewById(R.id.WebURL);
-        txtTitle.setText(text.get(position));
+        txtTitle.setText(Str.get(position));
+
+
         txtTitle.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAttentionClickListener.OnBookmartClick(index);
+                lster.OnBookmartClick(pos);
             }
         });
-        final ImageView btnDelete=(ImageView)view.findViewById(R.id.DeleteButton);
-        btnDelete.setTag(position);
-        btnDelete.setOnClickListener(new OnClickListener() {
+
+        final ImageView deletebutton = (ImageView)view.findViewById(R.id.DeleteButton);
+
+        deletebutton.setTag(position);
+
+        deletebutton.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                text.remove(index);
-                mAttentionClickListener.DeleteItem(index);
+                Str.remove(pos);
+                lster.DeleteItem(pos);
                 notifyDataSetChanged();
             }
         });
+
         return view;
     }
 }

@@ -59,6 +59,7 @@ public class BrowserControlFragment extends Fragment {
                 listener.OnNewButtonClick();
             }
         });
+        bm = myFragmentView.findViewById(R.id.BookMarkButton);
         bm.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
