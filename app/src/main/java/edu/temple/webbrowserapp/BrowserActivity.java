@@ -1,5 +1,6 @@
 package edu.temple.webbrowserapp;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -11,8 +12,10 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class BrowserActivity extends AppCompatActivity implements PageControlFragment.OnClickListener, BrowserControlFragment.OnNewButtonClickListener, PageListFragment.OnItemSelectedListener, PagerFragment.OnChangeListener {
@@ -314,6 +317,37 @@ public class BrowserActivity extends AppCompatActivity implements PageControlFra
             ID2 = -1;
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    // share button click function
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId()==R.id.sharebutton){
+            String sWeb=pager.getCurItemURL();
+            String sTt=pager.getCurItemTitle();
+            if ((sWeb==null) || (sTt==null)){
+                Toast.makeText(getApplicationContext(),
+                        "Please double check the website is being searched",
+                        Toast.LENGTH_LONG).show();
+            }
+            else {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, sTt+" - "+sWeb);
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
 
